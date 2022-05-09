@@ -33,15 +33,29 @@ public class Enemy : MonoBehaviour
                 {
                     transform.Translate(currentDir * speed * Time.deltaTime);
                 }
-                else
+                //Calculate new target here
+                if (targetNode != currentNode && targetNode != null)
                 {
-                    //Implement path finding here
-                    //Calculate new target here
                     currentNode = targetNode;
-                    currentDir = currentNode.transform.position - transform.position;
-                    currentDir = currentDir.normalized;
+                }
+                else if (targetNode != null && targetNode != currentNode)
+                {
+                    if (currentNode != null)
+                    {
+                        currentDir = currentNode.transform.position - transform.position;
+                        currentDir = currentDir.normalized;
+                    }
                 }
             }
+            // Find new target node
+            // If target node is not the AI's current node and target node is not null
+                // Set current node to target node
+            // Else if player target node not null and player target node not current node
+                // Set current node to player's target node
+
+            // If current node is not null
+                // Set current direction towards node
+            // Normalise current direction
             else
             {
                 Debug.LogWarning($"{name} - No current node");
@@ -77,4 +91,29 @@ public class Enemy : MonoBehaviour
     }
 
     //Implement DFS algorithm method here
+    private Node DepthFirstSearch()
+    {
+        Stack nodeStack = new Stack(); // Stacks the unvisited nodes, last one added to stack is next visited
+        List<Node> visitedNodes = new List<Node>(); // Tracks visited nodes
+        nodeStack.Push(GameManager.Instance.Nodes[0]); // Add root node to stack
+
+        while(nodeStack.Count > 0) // While stack is not empty
+        {
+            Node currentNode = (Node)nodeStack.Pop(); // Pop the last node added to stack
+            visitedNodes.Add(currentNode); // Mark current node as visited
+            foreach (Node child in currentNode.Children) // Loop through each child of current node
+            {
+                if(visitedNodes.Contains(child) == false && nodeStack.Contains(child) == false)
+                {
+                    if (child == GameManager.Instance.Player.CurrentNode) // Check if this child is equal to player's current node
+                    {
+                        return child; // If so, return the child
+                    }
+                    nodeStack.Push(child); // Push child to node
+                }
+            }
+        }
+
+        return null;
+    }
 }
