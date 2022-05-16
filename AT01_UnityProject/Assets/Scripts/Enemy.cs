@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public Node targetNode;
 
     [Tooltip("Movement speed modifier.")]
-    [SerializeField] private float speed = 3;
+    [SerializeField] private float speed = 4;
     private Node currentNode;
     private Vector3 currentDir;
     private bool playerCaught = false;
@@ -28,18 +28,34 @@ public class Enemy : MonoBehaviour
         {
             if (currentNode != null)
             {
-                //If within 0.25 units of the current node.
+                //If beyond 0.25 units of the current node.
                 if (Vector3.Distance(transform.position, currentNode.transform.position) > 0.25f)
                 {
                     transform.Translate(currentDir * speed * Time.deltaTime);
                 }
-                //Calculate new target here
-                if (targetNode != currentNode && targetNode != null)
+                // Implement pathfinding here
+                #region Pathfinding Pseudocode
+                // Find new target node
+                // If target node is not the AI's current node and target node is not null
+                // Set current node to target node
+                // Else if player's target node not null and player's target node not current node
+                // Set current node to player's target node
+
+                // If current node is not null
+                // Set current direction towards node
+                // Normalise current direction
+                #endregion Pathfinding Pseudocode
+                else
                 {
-                    currentNode = targetNode;
-                }
-                else if (targetNode != null && targetNode != currentNode)
-                {
+                    if (targetNode != currentNode && targetNode != null)
+                    {
+                        currentNode = targetNode;
+                    }
+                    else if (GameManager.Instance.Player.TargetNode != null && GameManager.Instance.Player.TargetNode != currentNode)
+                    {
+                        // Set current node to player's target node
+                        currentNode = GameManager.Instance.Player.TargetNode;
+                    }
                     if (currentNode != null)
                     {
                         currentDir = currentNode.transform.position - transform.position;
@@ -47,20 +63,10 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
-            // Find new target node
-            // If target node is not the AI's current node and target node is not null
-                // Set current node to target node
-            // Else if player target node not null and player target node not current node
-                // Set current node to player's target node
-
-            // If current node is not null
-                // Set current direction towards node
-            // Normalise current direction
             else
             {
                 Debug.LogWarning($"{name} - No current node");
             }
-
             Debug.DrawRay(transform.position, currentDir, Color.cyan);
         }
     }
