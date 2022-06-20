@@ -37,12 +37,12 @@ public class Enemy : MonoBehaviour
                 #region Pathfinding Pseudocode
                 // Find new target node
                 // If target node is not the AI's current node and target node is not null
-                // Set current node to target node
+                    // Set current node to target node
                 // Else if player's target node not null and player's target node not current node
-                // Set current node to player's target node
+                    // Set current node to player's target node
 
                 // If current node is not null
-                // Set current direction towards node
+                    // Set current direction towards node
                 // Normalise current direction
                 #endregion Pathfinding Pseudocode
                 else

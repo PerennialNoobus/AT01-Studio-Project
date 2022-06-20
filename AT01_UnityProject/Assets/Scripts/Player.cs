@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         if (moving == false)
         {
             //Implement inputs and event-callbacks here
-            if(Input.GetButtonDown("Vertical") == true)
+            if(Input.GetAxis("Vertical") != 0)
             {
                 float axis = Input.GetAxis("Vertical");
                 if (axis > 0)
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
                     InputEvent.Invoke('d');
                 }
             }
-            else if(Input.GetButtonDown("Horizontal") == true)
+            else if(Input.GetAxis("Horizontal") != 0)
             {
                 float axis = Input.GetAxis("Horizontal");
                 if (axis > 0)

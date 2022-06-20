@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetNode: {fileID: 1622374381}
-  speed: 4
+  speed: 10
 --- !u!135 &1059721680
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97d09ec131940f459b8aecbbf36557a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 10
 --- !u!135 &1220234474
 SphereCollider:
   m_ObjectHideFlags: 0
