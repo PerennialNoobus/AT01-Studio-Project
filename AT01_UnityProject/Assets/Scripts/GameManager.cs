@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Quits the game when the user presses the "Escape" key
+    private void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
+
     //Stores all the nodes
     [SerializeField] private Node[] nodes;
     //Stores reference to the player

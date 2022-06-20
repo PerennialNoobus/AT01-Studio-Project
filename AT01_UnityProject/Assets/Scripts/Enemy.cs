@@ -43,10 +43,12 @@ public class Enemy : MonoBehaviour
 
                 // If current node is not null
                     // Set current direction towards node
-                // Normalise current direction
+                    // Normalise current direction
                 #endregion Pathfinding Pseudocode
                 else
                 {
+                    // Implement code here
+                    targetNode = DepthFirstSearch();
                     if (targetNode != currentNode && targetNode != null)
                     {
                         currentNode = targetNode;
